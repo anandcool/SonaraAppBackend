@@ -33,7 +33,7 @@ router.post('/login',(req,res)=>{
         res.sendStatus(400,""+err.sqlMessage)  
        }else{
         res.status(200)
-        res.send(""+result[0].id)
+        res.send(result[0].id+"-"+result[0].name)
        }
    });
 })

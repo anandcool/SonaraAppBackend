@@ -8,7 +8,7 @@ const router = express.Router();
 // @route POST/customerdetails
 
 router.post('/customerdetails',(req,res)=>{
-    const user = {name:req.body.name,mobile:req.body.mobile,modelno:req.body.modelno,serialno:req.body.serialno,problem:req.body.problem,workdone:req.body.workdone,estimate:req.body.estimate,paid:req.body.paid,remarks:req.body.remarks}
+    const user = {name:req.body.name,mobile:req.body.mobile,modelno:req.body.modelno,serialno:req.body.serialno,problem:req.body.problem,estimate:req.body.estimate,paid:req.body.paid}
     let sql = "INSERT INTO `customers` SET ?";
     db.query(sql,user,(err,result)=>{
         if(err) {
@@ -36,6 +36,7 @@ router.get('/getalldetails',(req,res) =>{
         }
     })
 })
+
 
 
 
