@@ -8,15 +8,16 @@ const router = express.Router();
 // @route POST/customerdetails
 
 router.post('/customerdetails',(req,res)=>{
-    const user = {name:req.body.name,mobile:req.body.mobile,modelno:req.body.modelno,serialno:req.body.serialno,problem:req.body.problem,estimate:req.body.estimate,paid:req.body.paid}
+    // console.log(req.body);
+    const user = {name:req.body.name,mobile:req.body.mobile,modelno:req.body.modelno,serialno:req.body.serialno,problem:req.body.problem,estimate:req.body.estimate,paid:req.body.paid,enginner_id:req.body.enginner_id}
     let sql = "INSERT INTO `customers` SET ?";
     db.query(sql,user,(err,result)=>{
         if(err) {
-            console.log(err)
+            // console.log(err)
          res.sendStatus(400,""+err.sqlMessage)   
         }else{
         res.status(200);
-        res.send(""+result.insertId)
+        res.send(""+result.enginner_id)
         }
     })
 
@@ -31,12 +32,32 @@ router.get('/getalldetails',(req,res) =>{
         if(err){
             res.sendStatus(400,""+err.sqlMessage)
         }else{
+            console.log(result)
             res.status(200);
             res.send(result)
         }
     })
 })
 
+// @desc updatecustomerDetails
+// @route PUT/customerDetails/:id
+
+router.put('/remarks/',(req,res) =>{
+    const {mobile,remarks} = req.body;
+    let sql = `UPDATE customers SET remarks='${remarks}'  WHERE enginner_id= '${mobile}'`;
+    console.log(sql)
+    db.query(sql,(err,result) =>{
+        if(err){
+            // console.log("error",err)
+            res.sendStatus(400,err.sqlMessage);
+        }else{
+            console.log(result)
+            res.status(200);
+            res.send(result)
+
+        }
+    })
+})
 
 
 

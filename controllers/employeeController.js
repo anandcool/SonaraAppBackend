@@ -29,6 +29,7 @@ router.post('/login',(req,res)=>{
     const {mobile,pass} = req.body
     let sql = `SELECT * FROM  employees where mobile = '${mobile}' AND pass = '${pass}'`;
     db.query(sql,(err,result)=>{
+        console.log(result)
        if(err){
         res.sendStatus(400,""+err.sqlMessage)  
        }else{
@@ -39,5 +40,17 @@ router.post('/login',(req,res)=>{
 })
 
 
+router.get('/employee/details',(req,res) =>{
+    let sql = `SELECT * FROM employees`;
+    db.query(sql,(err,result) =>{
+        if(err){
+            res.sendStatus(400,""+err.sqlMessage)  
+           }else{
+            res.status(200)
+            res.send(result)
+            console.log(result)
+           }
+    })
+})
 
 module.exports = router;
