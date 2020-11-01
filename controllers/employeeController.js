@@ -29,10 +29,11 @@ router.post('/login',(req,res)=>{
     const {mobile,pass} = req.body
     let sql = `SELECT * FROM  employees where mobile = '${mobile}' AND pass = '${pass}'`;
     db.query(sql,(err,result)=>{
-        console.log(result)
+        // console.log(result)
        if(err){
         res.sendStatus(400,""+err.sqlMessage)  
        }else{
+        //    console.log("testing",result[0].id)
         res.status(200)
         res.send(result[0].id+"-"+result[0].name)
        }

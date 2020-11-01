@@ -59,6 +59,23 @@ router.put('/remarks/',(req,res) =>{
     })
 })
 
+// @desc AddComplaint
+// @route POST/addcomplaint
+
+router.post('/addcomplaint',(req,res) =>{
+    const user = {name:req.body.name,mobile:req.body.mobile,modelno:req.body.modelno,engineer_id:req.body.engineer_id,status:req.body.status,problem:req.body.problem,estimate:req.body.estimate,paid:req.body.paid}
+    let sql = "INSERT INTO `complaint` SET ?";
+    db.query(sql,user,(err,result)=>{
+        if(err) {
+            console.log(err)
+         res.sendStatus(400,""+err.sqlMessage)   
+        }else{
+        res.status(200);
+        res.send(""+result)
+        }
+    })
+})
+
 
 
 module.exports = router;
